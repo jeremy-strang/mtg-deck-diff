@@ -1,0 +1,96 @@
+$theme-color:         rgb(67, 146, 241); // #4392f1;
+
+$theme-blue:          $theme-color;
+$theme-green:         rgb(45, 145, 81); // #2d9151;
+$theme-red:           rgb(214, 49, 57); // #d63139;
+$theme-yellow:        rgb(249, 220, 92); // #f9dc5c;
+$theme-pink:          rgb(242, 133, 205); // #f285cd;
+$theme-orange:        rgb(255, 115, 0); // #ff7300;
+
+$dark1:               rgb(40, 40, 40); // #282828;
+$dark2:               lighten($dark1, 5%);
+$dark3:               lighten($dark1, 10%);
+$dark4:               lighten($dark1, 15%);
+$dark5:               lighten($dark1, 20%);
+$dark6:               lighten($dark1, 25%);
+$dark7:               lighten($dark1, 30%);
+$dark8:               lighten($dark1, 35%);
+$dark9:               lighten($dark1, 40%);
+$dark10:              lighten($dark1, 45%);
+
+$gray1:               rgb(251, 251, 251); // #fbfbfb;
+$gray2:               darken($gray1, 3%);
+$gray3:               darken($gray1, 6%);
+$gray4:               darken($gray1, 9%);
+$gray5:               darken($gray1, 13%);
+$gray6:               darken($gray1, 17%);
+$gray7:               darken($gray1, 21%);
+$gray8:               darken($gray1, 25%);
+$gray9:               darken($gray1, 29%);
+$gray10:              darken($gray1, 33%);
+
+$font-light:        rgb(255, 255, 255); // #fff;
+$font-dark:           $dark1;
+$font-stack:          sans-serif, Helvetica, Arial, 'Avenir';
+$font-size:           14px;
+$btn-font-size:       $font-size;
+
+$border-color:      rgb(187, 187, 187); // #bbb;
+$border-color-light:rgb(221, 221, 221); // #ddd;
+$border:              1px solid $border-color;
+$border-light:        1px solid $border-color-light;
+$border-red:          1px solid $theme-red;
+$border-radius-sm:    3px;
+$border-radius-md:    6px;
+$border-radius-lg:    8px;
+
+$pad-xxs-top:         1px;
+$pad-xxs-bottom:      1px;
+$pad-xxs-right:       1px;
+$pad-xxs-left:        1px;
+$pad-xxs:             $pad-xxs-top $pad-xxs-right $pad-xxs-bottom $pad-xxs-left;
+
+$pad-xs-top:          2px;
+$pad-xs-bottom:       2px;
+$pad-xs-right:        2px;
+$pad-xs-left:         2px;
+$pad-xs:              $pad-xs-top $pad-xs-right $pad-xs-bottom $pad-xs-left;
+
+$pad-sm-top:          4px;
+$pad-sm-bottom:       4px;
+$pad-sm-right:        6px;
+$pad-sm-left:         6px;
+$pad-sm:              $pad-sm-top $pad-sm-right $pad-sm-bottom $pad-sm-left;
+
+$pad-md-top:          8px;
+$pad-md-bottom:       8px;
+$pad-md-right:        10px;
+$pad-md-left:         10px;
+$pad-md:              $pad-md-top $pad-md-right $pad-md-bottom $pad-md-left;
+
+$pad-lg-top:          12px;
+$pad-lg-bottom:       12px;
+$pad-lg-right:        16px;
+$pad-lg-left:         16px;
+$pad-lg:              $pad-lg-top $pad-lg-right $pad-lg-bottom $pad-lg-left;
+
+$pad-xl-top:          16px;
+$pad-xl-bottom:       16px;
+$pad-xl-right:        24px;
+$pad-xl-left:         24px;
+$pad-xl:              $pad-xl-top $pad-xl-right $pad-xl-bottom $pad-xl-left;
+
+$pad-btn-top:         $pad-sm-top;
+$pad-btn-bottom:      $pad-sm-bottom;
+$pad-btn-right:       $pad-sm-right;
+$pad-btn-left:        $pad-sm-left;
+$pad-btn:             $pad-sm;
+
+$app-nav-height:      41px;
+$app-max-width:       100%;
+$app-min-width:       480px;
+
+$modal-wrap-index: 1001;
+$alert-list-index: $modal-wrap-index + 2;
+
+$convo-bar-height: 36px;
