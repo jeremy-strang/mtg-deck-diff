@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.scss'
-import { Deck, DeckComparer } from './helpers/diff'
+import { DeckComparer } from './helpers/deckComparer'
 
 interface IProps {
   deckListStrA: string
