@@ -26,22 +26,6 @@ body {
   border: none;
 }
 
-code, textarea {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-    font-size: 16px;
-}
-
-h1, h2, h3, h4, h5 {
-  text-align: left;
-  width: 100%;
-  margin: 0 6px 0 2px;
-}
-
-h4, h5 {
-  font-weight: normal;
-}
-
 div.App {
   position: relative;
   width: 100%;
@@ -53,19 +37,12 @@ div.App {
   overflow-x: hidden;
 }
 
-div.Width100 {
-  position: relative;
-  display: block;
-  padding: 6px 10px;
-  height: 50%;
-  width: 100%;
-}
-
 div.DeckListWrap {
   position: relative;
   width: 40%;
   height: 100%;
   margin: 6px;
+  max-width: 400px;
   display: inline-block;
 
   textarea.DeckList {

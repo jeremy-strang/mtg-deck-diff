@@ -100,9 +100,9 @@ textarea {
         }
 
         &.opacity-100 {
-          background-color: #fff;
+          background-color: $dark1;
           border-color: $theme-color;
-          color: $font-dark;
+          color: $gray3;
         }
       }
     }
@@ -111,12 +111,12 @@ textarea {
   &:read-only,
   &:disabled,
   &.disabled {
-    background-color: darken($gray1, 3%);
+    background-color: darken($dark1, 3%);
     cursor: disabled;
   }
 
   &::placeholder {
-    color: $dark8;
+    color: $gray8;
   }
 
   &.btn-input {
