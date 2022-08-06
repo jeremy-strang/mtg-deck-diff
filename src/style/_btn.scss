@@ -1,0 +1,115 @@
+button, .btn, input[type=submit] {
+  background-color: $gray4;
+  border-radius: $border-radius-md;
+  border: 1px solid darken($gray4, 2%);
+  box-sizing: border-box;
+  color: $font-dark;
+  cursor: pointer;
+  font-size: $btn-font-size;
+  outline: none;
+  padding: $pad-sm;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $gray3;
+    border-color: $gray4;
+
+    &.btn-green {
+      background-color: lighten($theme-green, 5%);
+      border-color: $theme-green;
+    }
+
+    &.btn-danger {
+      background-color: lighten($theme-red, 5%);
+      border-color: darken($theme-red, 12%);
+    }
+
+    &.btn-plain {
+      background-color: $gray3;
+    }
+
+    &.btn-primary {
+      background-color: $theme-blue;
+    }
+  }
+  
+  &.btn-green {
+    background-color: $theme-green;
+    border-color: darken($theme-green, 5%);
+    color: #fff;
+
+    &.disabled,
+    &:disabled {
+      opacity: 1;
+      background-color: lighten($theme-green, 5%);
+      border-color: lighten($theme-green, 5%);
+      color: lighten($theme-green, 35%);
+    }
+  }
+  
+  &.btn-danger {
+    background-color: $theme-red;
+    border-color: darken($theme-red, 15%);
+    color: $font-light;
+
+    &.disabled,
+    &:disabled {
+      opacity: 1;
+      background-color: lighten($theme-red, 5%);
+      border-color: lighten($theme-red, 5%);
+      color: lighten($theme-red, 30%);
+    }
+  }
+  
+  &.btn-plain {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    padding: 2px;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.15);
+      border: none;
+    }
+
+    &:focus {
+      background-color: transparent;
+      color: inherit;
+    }
+  }
+
+  &.btn-primary {
+    background-color: darken($theme-blue, 5%);
+    border-color: darken($theme-blue, 10%);
+    color: $font-light;
+
+    &.disabled,
+    &:disabled {
+      opacity: 1;
+      background-color: lighten($theme-blue, 5%);
+      border-color: lighten($theme-blue, 5%);
+      color: lighten($theme-blue, 30%);
+    }
+  }
+
+  &.btn-input {
+    border-bottom-left-radius: 0;
+    border-color: $border-color;
+    border-left-width: 0;
+    border-top-left-radius: 0;
+    font-size: $font-size;
+    height: $font-size + $pad-sm-top * 2 + 4px;
+    margin-left: 0;
+    min-width: 25px;
+    padding: $pad-sm;
+  }
+
+  &.disabled,
+  &:disabled {
+    cursor: not-allowed;
+    background-color: darken($gray4, 5%);
+    border-color: darken($gray4, 5%);
+    color: $dark6;
+  }
+}

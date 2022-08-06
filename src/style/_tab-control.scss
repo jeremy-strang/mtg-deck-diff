@@ -1,0 +1,81 @@
+$tab-item-height: 32px;
+
+.tab-control {
+  @extend .pnl-shadow;
+  @extend .pnl;
+  border: 1px solid $border-color;
+  border-radius: $border-radius-lg;
+  display: inline-block;
+  width: auto;
+
+  .tab-items {
+    @extend .pnl;
+    height: $tab-item-height;
+    overflow: visible;
+    white-space: nowrap;
+    border-bottom: 1px solid $gray5;
+    width: 100%;
+    background-color: $gray2;
+    border-top-right-radius: $border-radius-lg;
+    border-top-left-radius: $border-radius-lg;
+
+    .tab-item {
+      @extend .pnl;
+      @extend .h100;
+      @extend .float-left;
+      padding: $pad-sm;
+      border: 0px solid $gray5;
+      border-right-width: 1px;
+      border-top-left-radius: $border-radius-md;
+      border-top-right-radius: $border-radius-md;
+      cursor: pointer;
+      background-color: $gray3;
+      font-size: 15px;
+
+      > h4 {
+        margin: 0;
+        padding: $pad-sm;
+        border: 1px solid transparent;
+        border-radius: $border-radius-md;
+      }
+
+      &.active {
+        background-color: #fff;
+        border-bottom-width: 0;
+        height: $tab-item-height;
+
+        > h4 {
+          border-color: $gray3;
+        }
+      }
+
+      &:not(.active) {
+        &:hover {
+          background-color: $gray1;
+          border-bottom-color: transparent;
+        }
+      }
+    }
+
+    button, .btn, .btn-dd, input, a {
+      margin-right: 3px;
+      margin-top: 3px;
+      float: right;
+      &:not(:first-child) {
+        margin-left: 4px;
+      }
+    }
+  }
+
+  .tab-body {
+    @extend .pnl;
+    @extend .w100;
+    background-color: #fff;
+    border: 0 solid $border-color;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: $border-radius-lg;
+    border-bottom-right-radius: $border-radius-lg;
+    height: calc(100% - 33px);
+    padding: $pad-md;
+  }
+}

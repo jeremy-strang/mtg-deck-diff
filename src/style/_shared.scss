@@ -1,3 +1,22 @@
+/* Code to get hex colors:
+<div class="color-test bg-dark1">dark1: </div>
+<div class="color-test bg-dark2">dark2: </div>
+<div class="color-test bg-dark3">dark3: </div>
+<div class="color-test bg-dark4">dark4: </div>
+<div class="color-test bg-dark5">dark5: </div>
+<div class="color-test bg-dark6">dark6: </div>
+<div class="color-test bg-dark7">dark7: </div>
+<div class="color-test bg-dark8">dark8: </div>
+<div class="color-test bg-dark9">dark9: </div>
+<div class="color-test bg-dark10">dark10: </div>
+import { rgbToHex } from '@/utils/utils'
+import $ from 'jQuery'
+$.each($('.color-test'), (_, el) => {
+  const $el = $(el)
+  $el.html($el.html() + `'${rgbToHex($el.css('background-color'))}'`)
+})
+*/
+
 $theme-color:         rgb(67, 146, 241); // #4392f1;
 
 $theme-blue:          $theme-color;
@@ -94,3 +113,6 @@ $modal-wrap-index: 1001;
 $alert-list-index: $modal-wrap-index + 2;
 
 $convo-bar-height: 36px;
+
+@import '_wrappers.scss';
+@import '_helpers.scss';

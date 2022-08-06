@@ -1,3 +1,4 @@
+//
 export class Deck {
   companion: DeckLine[]
   mainDeck: DeckLine[]
@@ -26,10 +27,11 @@ export class Deck {
           mainDone = true
         }
 
+        const cardName = line.slice(line.indexOf(' '), line.length).trim()
         if (/^\d+\s+.*$/.test(line)) {
           let deckLine: DeckLine = {
             quantity: parseInt(line.slice(0, line.indexOf(' '))),
-            card: line.slice(line.indexOf(' '), line.length).trim(),
+            card: cardName,
           }
           
           if (!companionDone) {
@@ -71,6 +73,7 @@ export class Deck {
 export interface DeckLine {
   quantity: number
   card: string
+  cardData?: object
 }
 
 export class DeckComparer {
