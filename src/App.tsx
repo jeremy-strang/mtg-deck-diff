@@ -89,7 +89,7 @@ class App extends React.Component<IProps, IState> {
     let resultWrap: React.ReactNode
 
     if (this.state.deckListStrA && this.state.deckListStrB) {
-      resultWrap = <div className='Width100'>
+      resultWrap = <div className='Width100Height50'>
         <div className='DeckListWrap'>
           <h4>Results</h4>
           <textarea
@@ -101,13 +101,13 @@ class App extends React.Component<IProps, IState> {
         </div>
       </div>
     } else {
-      resultWrap = <div className='Width100'>
+      resultWrap = <div className='Width100Height50'>
         <h4 className='TextCenter'>Add two decklists to compute their differences</h4>
       </div>
     }
     return (
       <div className="App">
-        <div className='Width100'>
+        <div className='Width100Height50'>
           <div className='DeckListWrap'>
             <h4>Deck A</h4>
             <textarea

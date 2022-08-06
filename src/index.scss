@@ -24,17 +24,26 @@ body {
   margin: 0;
   padding: 0;
   border: none;
+  width: 100%;
+  height: 100%;
+}
+
+#root, div.App {
+  @extend .pnl;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 div.App {
-  position: relative;
+  padding: $pad-lg;
+}
+
+div.Width100Height50 {
+  @extend .pnl;
   width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  border: none;
-  overflow-y: auto;
-  overflow-x: hidden;
+  height: 50%;
 }
 
 div.DeckListWrap {
@@ -46,7 +55,7 @@ div.DeckListWrap {
   display: inline-block;
 
   textarea.DeckList {
-    height: calc(100% - 30px);
+    height: calc(100% - 36px);
     width: 100%;
 
     &:focus, &:active {
