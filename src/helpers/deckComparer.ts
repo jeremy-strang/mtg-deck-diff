@@ -1,3 +1,18 @@
+const companions = [
+  'Gyruda, Doom of Depths',
+  'Jegantha, the Wellspring',
+  'Kaheera, the Orphanguard',
+  'Keruga, the Macrosage',
+  'Lurrus of the Dream-Den',
+  'Lutri, the Spellchaser',
+  'Obosh, the Preypiercer',
+  'Umori, the Collector',
+  'Yorion, Sky Nomad',
+  'Zirda, the Dawnwaker',
+]
+
+const companionsSetLower = new Set(companions.map(comp => comp.toLowerCase()))
+
 //
 export class Deck {
   companion: DeckLine[]
@@ -39,11 +54,14 @@ export class Deck {
           }
           
           if (!companionDone) {
-            parsedDeck.companion.push(deckLine)
+            parsedDeck.companion = [deckLine]
           } else if (!mainDone) {
             parsedDeck.mainDeck.push(deckLine)
           } else {
             parsedDeck.sideboard.push(deckLine)
+            if (companionsSetLower.has(cardName.toLowerCase()) && parsedDeck.companion.length === 0) {
+              parsedDeck.companion = [deckLine]
+            }
           }
         }
       }
