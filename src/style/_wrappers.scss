@@ -244,8 +244,8 @@ i.fa.fa-question-circle {
 .pnl-toolbar {
   @extend .pnl;
   @extend .w100;
-  background-color: $gray2;
-  border-bottom: 1px solid $gray5;
+  background-color: $dark2;
+  border-bottom: 1px solid $border-color;
   border-top-left-radius: $border-radius-md;
   border-top-right-radius: $border-radius-md;
   overflow: hidden;

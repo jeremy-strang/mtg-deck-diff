@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.scss'
+import DiffSettingsModal from './components/DiffSettingsModal'
 import { Deck } from './helpers/deck'
 
 interface IProps {
@@ -11,6 +12,7 @@ interface IState {
   deckListStrA: string
   deckListStrB: string
   diffListStr: string
+  isSettingsModalOpen: boolean
 }
 
 class App extends React.Component<IProps, IState> {
@@ -30,6 +32,7 @@ class App extends React.Component<IProps, IState> {
       deckListStrA: deckListStrA,
       deckListStrB: '',
       diffListStr: '',
+      isSettingsModalOpen: true,
     } as IState
   }
 
@@ -92,6 +95,11 @@ class App extends React.Component<IProps, IState> {
 
   render(): React.ReactNode {
     let resultWrap: React.ReactNode
+    let settingsModal: React.ReactNode | null = null
+
+    if (this.state.isSettingsModalOpen) {
+      settingsModal = <DiffSettingsModal></DiffSettingsModal>
+    }
 
     if (this.state.deckListStrA && this.state.deckListStrB) {
       resultWrap = <div className='Width100Height50'>
@@ -134,6 +142,7 @@ class App extends React.Component<IProps, IState> {
           </div>
         </div>
         {resultWrap}
+        {settingsModal}
       </div>
     )
   }

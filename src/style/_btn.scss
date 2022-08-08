@@ -1,9 +1,9 @@
 button, .btn, input[type=submit] {
-  background-color: $gray4;
+  background-color: $dark4;
   border-radius: $border-radius-md;
-  border: 1px solid darken($gray4, 2%);
+  border: 1px solid lighten($dark4, 2%);
   box-sizing: border-box;
-  color: $font-dark;
+  color: $font-light;
   cursor: pointer;
   font-size: $btn-font-size;
   outline: none;
@@ -12,8 +12,8 @@ button, .btn, input[type=submit] {
   &:hover,
   &:focus,
   &:active {
-    background-color: $gray3;
-    border-color: $gray4;
+    background-color: $dark3;
+    border-color: $dark4;
 
     &.btn-green {
       background-color: lighten($theme-green, 5%);
@@ -26,7 +26,7 @@ button, .btn, input[type=submit] {
     }
 
     &.btn-plain {
-      background-color: $gray3;
+      background-color: $dark3;
     }
 
     &.btn-primary {

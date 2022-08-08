@@ -1,4 +1,4 @@
-@import 'style/_shared.scss';
+@import '_shared.scss';
 @import 'style/_helpers.scss';
 @import 'style/_btn.scss';
 @import 'style/_elements.scss';
@@ -48,11 +48,15 @@ div.Width100Height50 {
 
 div.DeckListWrap {
   position: relative;
-  width: 40%;
   height: 100%;
+  width: 40%;
   margin: 6px;
   max-width: 400px;
   display: inline-block;
+
+  &.w100 {
+    width: 100%;
+  }
 
   textarea.DeckList {
     font-family: monospace;

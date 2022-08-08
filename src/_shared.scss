@@ -54,7 +54,7 @@ $font-stack:          sans-serif, Helvetica, Arial, 'Avenir';
 $font-size:           14px;
 $btn-font-size:       $font-size;
 
-$border-color:      rgb(187, 187, 187); // #bbb;
+$border-color:        $dark6; // #bbb;
 $border-color-light:rgb(221, 221, 221); // #ddd;
 $border:              1px solid $border-color;
 $border-light:        1px solid $border-color-light;
@@ -114,5 +114,5 @@ $alert-list-index: $modal-wrap-index + 2;
 
 $convo-bar-height: 36px;
 
-@import '_wrappers.scss';
-@import '_helpers.scss';
+@import 'style/_wrappers.scss';
+@import 'style/_helpers.scss';
