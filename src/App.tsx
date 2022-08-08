@@ -52,7 +52,12 @@ class App extends React.Component<IProps, IState> {
 
   computeDiffListStr = (deckListStrA: string, deckListStrB: string): string => {
     const deckListA = new DeckComparer(deckListStrA)
-    return deckListA.computeDiff(new DeckComparer(deckListStrB)).toString()
+    
+    if (window.localStorage) {
+      window.localStorage.setItem('deckListStrA', deckListA.deck.toString())
+    }
+
+    return deckListA.computeDiff(new DeckComparer(deckListStrB)).toString(true)
   }
 
   handleChangeA = (e: any) => {

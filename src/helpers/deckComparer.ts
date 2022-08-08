@@ -27,6 +27,10 @@ export class Deck {
           mainDone = true
         }
 
+        if (line.startsWith('+')) {
+          line = line.slice(0, line.length)
+        }
+
         const cardName = line.slice(line.indexOf(' '), line.length).trim()
         if (/^\d+\s+.*$/.test(line)) {
           let deckLine: DeckLine = {
@@ -48,11 +52,11 @@ export class Deck {
     return parsedDeck
   }
 
-  toString(): string {
+  toString(isDiff?: boolean): string {
     let result = ''
 
     const joinDeckLines = (deckLines: DeckLine[]) =>
-      deckLines.map(item => `${item.quantity > 0 ? '+' : ''}${item.quantity} ${item.card}`).join('\n')
+      deckLines.map(item => `${item.quantity > 0 && isDiff ? '+' : ''}${item.quantity} ${item.card}`).join('\n')
 
     if (this.companion.length > 0) {
       const companionStr = joinDeckLines(this.companion)
