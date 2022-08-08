@@ -46,6 +46,12 @@ div.Width100Height50 {
   height: 50%;
 }
 
+div.ButtonWrap {
+  @extend .pnl;
+  display: block;
+  width: 100%;
+}
+
 div.DeckListWrap {
   position: relative;
   height: 100%;

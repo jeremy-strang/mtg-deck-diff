@@ -93,12 +93,24 @@ class App extends React.Component<IProps, IState> {
     }
   }
 
+  onOpenSettingsModal =() => {
+    this.setState({
+      isSettingsModalOpen: true,
+    })
+  }
+
+  onCloseSettingsModal = () => {
+    this.setState({
+      isSettingsModalOpen: false,
+    })
+  }
+
   render(): React.ReactNode {
     let resultWrap: React.ReactNode
     let settingsModal: React.ReactNode | null = null
 
     if (this.state.isSettingsModalOpen) {
-      settingsModal = <DiffSettingsModal></DiffSettingsModal>
+      settingsModal = <DiffSettingsModal onDone={this.onCloseSettingsModal}></DiffSettingsModal>
     }
 
     if (this.state.deckListStrA && this.state.deckListStrB) {
@@ -120,6 +132,9 @@ class App extends React.Component<IProps, IState> {
     }
     return (
       <div className="App">
+        <div className="ButtonWrap">
+          <button onClick={this.onOpenSettingsModal}>Settings</button>
+        </div>
         <div className='Width100Height50'>
           <div className='DeckListWrap'>
             <h4>Deck A</h4>

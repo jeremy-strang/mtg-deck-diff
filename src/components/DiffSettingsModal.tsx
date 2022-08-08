@@ -4,6 +4,7 @@ import { faFloppyDisk, faXmark } from '@fortawesome/free-solid-svg-icons'
 import './DiffSettingsModal.scss'
 
 interface IProps {
+  onDone: Function
 }
 
 interface IState {
@@ -55,10 +56,6 @@ class DiffSettingsModal extends React.Component<IProps, IState> {
     })
   }
 
-  onDone = () => {
-
-  }
-
   render(): React.ReactNode {
     return (
       <div className="DiffSettingsModal modal-wrap">
@@ -68,7 +65,7 @@ class DiffSettingsModal extends React.Component<IProps, IState> {
               Settings
             </div>
             <div className="modal-btns">
-              <button onClick={this.onDone} className="modal-x"><FontAwesomeIcon icon={faXmark} /></button>
+              <button onClick={() => this.props.onDone()} className="modal-x"><FontAwesomeIcon icon={faXmark} /></button>
             </div>
           </div>
           
@@ -84,7 +81,7 @@ class DiffSettingsModal extends React.Component<IProps, IState> {
           </div>
 
           <div className="modal-btn-wrap">
-            <button onClick={this.onDone} v-show="previewMessages.length > 0" className="btn-primary">
+            <button onClick={() => this.props.onDone()} v-show="previewMessages.length > 0" className="btn-primary">
               <FontAwesomeIcon icon={faFloppyDisk} /> Done
             </button>
           </div>
