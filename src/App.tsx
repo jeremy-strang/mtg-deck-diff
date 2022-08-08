@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.scss'
-import { DeckComparer } from './helpers/deckComparer'
+import { Deck } from './helpers/deck'
 
 interface IProps {
   deckListStrA: string
@@ -51,13 +51,13 @@ class App extends React.Component<IProps, IState> {
   }
 
   computeDiffListStr = (deckListStrA: string, deckListStrB: string): string => {
-    const deckListA = new DeckComparer(deckListStrA)
+    const deckListA = Deck.parse(deckListStrA)
     
     if (window.localStorage) {
-      window.localStorage.setItem('deckListStrA', deckListA.deck.toString())
+      window.localStorage.setItem('deckListStrA', deckListA.toString())
     }
 
-    return deckListA.computeDiff(new DeckComparer(deckListStrB)).toString(true)
+    return deckListA.computeDiff(Deck.parse(deckListStrB)).toString(true)
   }
 
   handleChangeA = (e: any) => {
