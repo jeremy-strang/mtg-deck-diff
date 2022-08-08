@@ -11,7 +11,12 @@ const companions = [
   'Zirda, the Dawnwaker',
 ]
 
-const companionsSetLower = new Set(companions.map(comp => comp.toLowerCase()))
+//
+export interface DeckLine {
+  quantity: number
+  card: string
+  cardData?: object
+}
 
 //
 export class Deck {
@@ -27,7 +32,8 @@ export class Deck {
 
   static parse(deckListStr: string): Deck {
     const parsedDeck = new Deck([], [], [])
-
+    const companionsSetLower = new Set(companions.map(comp => comp.toLowerCase()))
+    
     if (deckListStr) {
       let mainDone = false
       let companionDone = true
@@ -90,30 +96,12 @@ export class Deck {
     }
     return result
   }
-}
 
-export interface DeckLine {
-  quantity: number
-  card: string
-  cardData?: object
-}
-
-export class DeckComparer {
-  deck: Deck
-
-  constructor(deckListStr: string) {
-    this.deck = Deck.parse(deckListStr)
-  }
-
-  computeDiff(otherDeckList: DeckComparer): Deck {
-    const otherDeck = otherDeckList.deck
-
+  computeDiff(otherDeck: Deck): Deck {
     const diff = new Deck(
-      this.computeSubDiff(this.deck.companion, otherDeck.companion),
-      this.computeSubDiff(this.deck.mainDeck, otherDeck.mainDeck),
-      this.computeSubDiff(this.deck.sideboard, otherDeck.sideboard))
-    
-    console.log(diff)
+      this.computeSubDiff(this.companion, otherDeck.companion),
+      this.computeSubDiff(this.mainDeck, otherDeck.mainDeck),
+      this.computeSubDiff(this.sideboard, otherDeck.sideboard))
     return diff
   }
 
@@ -129,19 +117,19 @@ export class DeckComparer {
     return result
   }
 
-  private computeSubDiff(thisDeck: DeckLine[], otherDeck: DeckLine[]): DeckLine[] {
-    const thisDeckMap = this.buildCardQuantityMap(thisDeck)
-    const otherDeckMap = this.buildCardQuantityMap(otherDeck)
+  private computeSubDiff(deckLines: DeckLine[], otherDeckLines: DeckLine[]): DeckLine[] {
+    const thisDeckMap = this.buildCardQuantityMap(deckLines)
+    const otherDeckMap = this.buildCardQuantityMap(otherDeckLines)
     const diffDeckMap = new Map<string, number>()
 
-    for (let cq of thisDeck) {
+    for (let cq of deckLines) {
       let otherQuantity = otherDeckMap.has(cq.card) ? otherDeckMap.get(cq.card) : 0
       if (otherQuantity !== cq.quantity) {
         diffDeckMap.set(cq.card, (otherQuantity ?? 0) - cq.quantity)
       }
     }
 
-    for (let cq of otherDeck) {
+    for (let cq of otherDeckLines) {
       let thisQuantity = thisDeckMap.has(cq.card) ? thisDeckMap.get(cq.card) : 0
       if (thisQuantity !== cq.quantity && !diffDeckMap.has(cq.card)) {
         diffDeckMap.set(cq.card, cq.quantity - (thisQuantity ?? 0))
