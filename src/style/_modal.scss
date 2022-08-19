@@ -19,6 +19,7 @@ $modal-hdr-height: 28px;
   top: $pad-xl-top;
   z-index: 991;
   height: auto;
+  border: 1px solid $dark5;
 
   &.xs {
     margin-left: -225px;
@@ -166,7 +167,7 @@ $modal-hdr-height: 28px;
   background-color: $dark3;
   border-bottom-left-radius: $border-radius-lg;
   border-bottom-right-radius: $border-radius-lg;
-  border-top: 1px solid $border-color;
+  border-top: 1px solid $border-color-light;
   padding: $pad-md;
 
   button, input[type=submit], .btn, .btn-dd, a, .agreement {
