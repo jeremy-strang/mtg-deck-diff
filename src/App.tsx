@@ -1,3 +1,5 @@
+import { faGear } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import './App.scss'
 import DiffSettingsModal from './components/DiffSettingsModal'
@@ -136,7 +138,9 @@ class App extends React.Component<IProps, IState> {
       <div className="App">
         <div className="ButtonWrap">
           <button onClick={this.onCompare} className='btn-primary'>Compare</button>
-          <button onClick={this.onOpenSettingsModal}>Settings</button>
+          <button onClick={this.onOpenSettingsModal}>
+            <FontAwesomeIcon icon={faGear} />
+          </button>
         </div>
         <div className='BodyWrap'>
           <div className='DeckListWrap'>

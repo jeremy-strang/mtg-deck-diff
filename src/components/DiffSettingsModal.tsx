@@ -55,7 +55,7 @@ class DiffSettingsModal extends React.Component<IProps, IState> {
 
           <div className="modal-btn-wrap">
             <button onClick={() => this.props.onDone(this.state.ignoredCardNamesStr.split('\n'))} className="btn-primary">
-              <FontAwesomeIcon icon={faFloppyDisk} /> Done
+              <FontAwesomeIcon icon={faFloppyDisk} /> Save
             </button>
           </div>
         </div>
