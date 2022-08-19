@@ -35,51 +35,33 @@ body {
   overflow: auto;
 }
 
-div.App {
-  padding: $pad-lg;
-}
 
-div.ButtonWrap {
-  @extend .pnl;
-  display: block;
-  width: 100%;
-
-  button:not(:first-child) {
-    margin-left: $pad-sm-left;
+.deck {
+  display: grid;
+  
+  .deck-label,
+  .deck-text {
+    grid-column-start: 1;
+    grid-column-end: 3;
   }
-}
 
-div.BodyWrap {
-  @extend .pnl;
-  display: block;
-  width: 100%;
-  height: calc(100% - 40px);
-}
-
-div.DeckListWrap {
-  position: relative;
-  height: 100%;
-  width: calc(33% - 12px);
-  margin: 6px;
-  display: inline-block;
-  max-width: 350px;
-
-  &.w100 {
+  .deck-label {
     width: 100%;
   }
 
-  textarea.DeckList {
+  textarea.deck-text {
+    border-radius: 0.2rem;
     font-family: monospace;
-    height: calc(100% - 36px);
     width: 100%;
     resize: none;
 
-    &:focus, &:active {
-      border-color: $theme-blue;
+    &:read-only {
+      background-color: $dark1;
+
+      &:focus {
+        border-color: $dark3;
+        background-color: $dark1;
+      }
     }
   }
-}
-
-.TextCenter {
-  text-align: center;
 }

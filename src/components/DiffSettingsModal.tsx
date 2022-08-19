@@ -43,10 +43,14 @@ class DiffSettingsModal extends React.Component<IProps, IState> {
           </div>
           
           <div className="modal-body o-visible">
-            <div className='DeckListWrap w100'>
-              <h4>Ignore these card names:</h4>
+
+            <div className="item deck deck-b">
+              <h4 className="deck-label">
+                List card names to ignore (one per line)
+              </h4>
               <textarea
-                className='DeckList'
+                name="deck-b"
+                className="deck-text"
                 value={this.state.ignoredCardNamesStr}
                 onChange={this.handleChange}
                 rows={15}></textarea>

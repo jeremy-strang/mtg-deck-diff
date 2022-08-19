@@ -119,17 +119,17 @@ class App extends React.Component<IProps, IState> {
     }
     return (
       <div className="App">
-        <div className="item header">
-          <h3>Paste/enter your deck lists, then click "Compare"</h3>
+        <div className="header">
+          <h3>Paste/enter your deck lists, then click the arrow button</h3>
         </div>
 
-        <div className="item buttons">
+        <div className="buttons">
           <button onClick={this.onOpenSettingsModal}>
             <FontAwesomeIcon icon={faGear} />
           </button>
         </div>
 
-        <div className="item deck deck-a">
+        <div className="deck deck-a">
           <h4 className="deck-label">
             Deck A
           </h4>
@@ -142,7 +142,7 @@ class App extends React.Component<IProps, IState> {
             rows={15}></textarea>
         </div>
 
-        <div className="item deck deck-b">
+        <div className="deck deck-b">
           <h4 className="deck-label">
             Deck B
           </h4>
@@ -155,13 +155,13 @@ class App extends React.Component<IProps, IState> {
             rows={15}></textarea>
         </div>
 
-        <div className="item deck-compare">
+        <div className="deck-compare">
           <button onClick={this.onCompare} className='btn-primary'>
             <FontAwesomeIcon icon={faArrowRight} />
           </button>
         </div>
 
-        <div className="item deck deck-diff">
+        <div className="deck deck-diff">
           <h4 className="deck-label">
             Results
           </h4>
@@ -174,6 +174,7 @@ class App extends React.Component<IProps, IState> {
             rows={15}
             readOnly={true}></textarea>
         </div>
+        
         {settingsModal}
       </div>
     )
