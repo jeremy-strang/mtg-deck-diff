@@ -1,4 +1,4 @@
-import { faGear } from '@fortawesome/free-solid-svg-icons'
+import { faGear, faArrowRight} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import './App.scss'
@@ -122,12 +122,13 @@ class App extends React.Component<IProps, IState> {
         <div className="item header">
           <h3>Paste/enter your deck lists, then click "Compare"</h3>
         </div>
+
         <div className="item buttons">
-          <button onClick={this.onCompare} className='btn-primary'>Compare</button>
           <button onClick={this.onOpenSettingsModal}>
             <FontAwesomeIcon icon={faGear} />
           </button>
         </div>
+
         <div className="item deck deck-a">
           <h4 className="deck-label">
             Deck A
@@ -140,6 +141,7 @@ class App extends React.Component<IProps, IState> {
             ref={this.deckInputA}
             rows={15}></textarea>
         </div>
+
         <div className="item deck deck-b">
           <h4 className="deck-label">
             Deck B
@@ -152,6 +154,13 @@ class App extends React.Component<IProps, IState> {
             ref={this.deckInputB}
             rows={15}></textarea>
         </div>
+
+        <div className="item deck-compare">
+          <button onClick={this.onCompare} className='btn-primary'>
+            <FontAwesomeIcon icon={faArrowRight} />
+          </button>
+        </div>
+
         <div className="item deck deck-diff">
           <h4 className="deck-label">
             Results
