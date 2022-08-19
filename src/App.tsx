@@ -4,14 +4,15 @@ import DiffSettingsModal from './components/DiffSettingsModal'
 import { Deck } from './helpers/deck'
 
 interface IProps {
-  deckListStrA: string
-  deckListStrB: string
+  deckStrA: string
+  deckStrB: string
 }
 
 interface IState {
-  deckListStrA: string
-  deckListStrB: string
-  diffListStr: string
+  deckStrA: string
+  deckStrB: string
+  ignoredCardNames: string[]
+  diffStr: string
   isSettingsModalOpen: boolean
 }
 
@@ -27,12 +28,13 @@ class App extends React.Component<IProps, IState> {
     this.deckInputB = React.createRef<HTMLTextAreaElement>()
     this.diffOutput = React.createRef<HTMLTextAreaElement>()
 
-    let deckListStrA = window.localStorage ? window.localStorage.getItem('deckListStrA') || '' : ''
+    let deckStrA = window.localStorage ? window.localStorage.getItem('deckStrA') || '' : ''
     this.state = {
-      deckListStrA: deckListStrA,
-      deckListStrB: '',
-      diffListStr: '',
-      isSettingsModalOpen: true,
+      deckStrA: deckStrA,
+      deckStrB: '',
+      diffStr: '',
+      ignoredCardNames: [],
+      isSettingsModalOpen: false,
     } as IState
   }
 
@@ -53,42 +55,42 @@ class App extends React.Component<IProps, IState> {
     this.diffOutput.current?.focus()
   }
 
-  computeDiffListStr = (deckListStrA: string, deckListStrB: string): string => {
-    const deckListA = Deck.parse(deckListStrA)
+  computeDiffListStr = (deckStrA: string, deckStrB: string): string => {
+    const deckListA = Deck.parse(deckStrA)
     
     if (window.localStorage) {
-      window.localStorage.setItem('deckListStrA', deckListA.toString())
+      window.localStorage.setItem('deckStrA', deckListA.toString())
     }
 
-    return deckListA.computeDiff(Deck.parse(deckListStrB)).toString(true)
+    return deckListA.computeDiff(Deck.parse(deckStrB), this.state.ignoredCardNames).toString(true)
   }
 
   handleChangeA = (e: any) => {
-    const deckListStrA = e.target.value || ''
+    const deckStrA = e.target.value || ''
     if (window.localStorage) {
-      window.localStorage.setItem('deckListStrA', deckListStrA)
+      window.localStorage.setItem('deckStrA', deckStrA)
     }
-    if (this.state.deckListStrB) {
+    if (this.state.deckStrB) {
       this.setState({
-        deckListStrA,
-        diffListStr: this.computeDiffListStr(e.target.value, this.state.deckListStrB),
+        deckStrA: deckStrA,
+        diffStr: this.computeDiffListStr(e.target.value, this.state.deckStrB),
       }, () => this.resetScroll())
     } else {
       this.setState({
-        deckListStrA,
+        deckStrA: deckStrA,
       })
     }
   }
 
   handleChangeB = (e: any) => {
-    if (this.state.deckListStrA) {
+    if (this.state.deckStrA) {
       this.setState({
-        deckListStrB: e.target.value,
-        diffListStr: this.computeDiffListStr(this.state.deckListStrA, e.target.value),
+        deckStrB: e.target.value,
+        diffStr: this.computeDiffListStr(this.state.deckStrA, e.target.value),
       })
     } else {
       this.setState({
-        deckListStrB: e.target.value,
+        deckStrB: e.target.value,
       })
     }
   }
@@ -99,10 +101,18 @@ class App extends React.Component<IProps, IState> {
     })
   }
 
-  onCloseSettingsModal = () => {
-    this.setState({
+  onCloseSettingsModal = (ignoredCardNames?: string[]) => {
+    const newState = {
       isSettingsModalOpen: false,
-    })
+    } as IState
+    
+    if (ignoredCardNames) {
+      newState.ignoredCardNames = ignoredCardNames
+      if (this.state.deckStrA && this.state.deckStrB) {
+        newState.diffStr = this.computeDiffListStr(this.state.deckStrA, this.state.deckStrB)
+      }
+    }
+    this.setState(newState)
   }
 
   render(): React.ReactNode {
@@ -113,13 +123,13 @@ class App extends React.Component<IProps, IState> {
       settingsModal = <DiffSettingsModal onDone={this.onCloseSettingsModal}></DiffSettingsModal>
     }
 
-    if (this.state.deckListStrA && this.state.deckListStrB) {
+    if (this.state.deckStrA && this.state.deckStrB) {
       resultWrap = <div className='Width100Height50'>
         <div className='DeckListWrap'>
           <h4>Results</h4>
           <textarea
             className='DeckList'
-            value={this.state.diffListStr}
+            value={this.state.diffStr}
             ref={this.diffOutput}
             rows={15}
             readOnly={true}></textarea>
@@ -140,7 +150,7 @@ class App extends React.Component<IProps, IState> {
             <h4>Deck A</h4>
             <textarea
               className='DeckList'
-              value={this.state.deckListStrA}
+              value={this.state.deckStrA}
               onChange={this.handleChangeA}
               ref={this.deckInputA}
               rows={15}></textarea>
@@ -150,7 +160,7 @@ class App extends React.Component<IProps, IState> {
             <h4>Deck B</h4>
             <textarea
               className='DeckList'
-              value={this.state.deckListStrB}
+              value={this.state.deckStrB}
               ref={this.deckInputB}
               onChange={this.handleChangeB}
               rows={15}></textarea>

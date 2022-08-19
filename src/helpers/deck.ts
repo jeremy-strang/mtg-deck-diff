@@ -97,11 +97,14 @@ export class Deck {
     return result
   }
 
-  computeDiff(otherDeck: Deck): Deck {
+  computeDiff(otherDeck: Deck, ignoredCardNames?: string[]): Deck {
+    const ignoredNames = ignoredCardNames ? new Set<string>(ignoredCardNames.map((n) => n.toLowerCase())) : new Set<string>()
+    const filterNames = (line: DeckLine) => !ignoredNames.has(line.card.toLowerCase())
+    
     const diff = new Deck(
-      this.computeSubDiff(this.companion, otherDeck.companion),
-      this.computeSubDiff(this.mainDeck, otherDeck.mainDeck),
-      this.computeSubDiff(this.sideboard, otherDeck.sideboard))
+      this.computeSubDiff(this.companion.filter(filterNames), otherDeck.companion.filter(filterNames)),
+      this.computeSubDiff(this.mainDeck.filter(filterNames), otherDeck.mainDeck.filter(filterNames)),
+      this.computeSubDiff(this.sideboard.filter(filterNames), otherDeck.sideboard.filter(filterNames)))
     return diff
   }
 
@@ -121,6 +124,7 @@ export class Deck {
     const thisDeckMap = this.buildCardQuantityMap(deckLines)
     const otherDeckMap = this.buildCardQuantityMap(otherDeckLines)
     const diffDeckMap = new Map<string, number>()
+    
 
     for (let cq of deckLines) {
       let otherQuantity = otherDeckMap.has(cq.card) ? otherDeckMap.get(cq.card) : 0

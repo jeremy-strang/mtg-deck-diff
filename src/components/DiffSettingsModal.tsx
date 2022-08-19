@@ -8,51 +8,27 @@ interface IProps {
 }
 
 interface IState {
-  skipCardNames: string
+  ignoredCardNames: string
 }
 
 class DiffSettingsModal extends React.Component<IProps, IState> {
-  // private deckInputA: React.RefObject<HTMLTextAreaElement>
-  // private deckInputB: React.RefObject<HTMLTextAreaElement>
-  // private diffOutput: React.RefObject<HTMLTextAreaElement>
-
+  //
   constructor(props: IProps) {
     super(props)
 
-    // this.deckInputA = React.createRef<HTMLTextAreaElement>()
-    // this.deckInputB = React.createRef<HTMLTextAreaElement>()
-    // this.diffOutput = React.createRef<HTMLTextAreaElement>()
-
-    let skipCardNames = window.localStorage ? window.localStorage.getItem('skipCardNames') || '' : ''
+    let ignoredCardNames = window.localStorage ? window.localStorage.getItem('ignoredCardNames') || '' : ''
     this.state = {
-      skipCardNames: skipCardNames || '',
+      ignoredCardNames: ignoredCardNames || '',
     } as IState
   }
 
-  // componentDidUpdate = () => {
-  //   this.resetScroll()
-  // }
-
-  // resetScroll = () => {
-  //   if (this.deckInputA && this.deckInputA.current) {
-  //     this.deckInputA.current.scrollTop = 0
-  //   }
-  //   if (this.deckInputB && this.deckInputB.current) {
-  //     this.deckInputB.current.scrollTop = 0
-  //   }
-  //   if (this.diffOutput && this.diffOutput.current) {
-  //     this.diffOutput.current.scrollTop = 0
-  //   }
-  //   this.diffOutput.current?.focus()
-  // }
-
   handleChange = (e: any) => {
-    const skipCardNames = e.target.value || ''
+    const ignoredCardNames = e.target.value || ''
     if (window.localStorage) {
-      window.localStorage.setItem('skipCardNames', skipCardNames)
+      window.localStorage.setItem('ignoredCardNames', ignoredCardNames)
     }
     this.setState({
-      skipCardNames,
+      ignoredCardNames,
     })
   }
 
@@ -74,21 +50,17 @@ class DiffSettingsModal extends React.Component<IProps, IState> {
               <h4>Ignore these card names:</h4>
               <textarea
                 className='DeckList'
-                value={this.state.skipCardNames}
+                value={this.state.ignoredCardNames}
                 onChange={this.handleChange}
                 rows={15}></textarea>
             </div>
           </div>
 
           <div className="modal-btn-wrap">
-            <button onClick={() => this.props.onDone()} v-show="previewMessages.length > 0" className="btn-primary">
+            <button onClick={() => this.props.onDone(this.state.ignoredCardNames.split('\n'))} className="btn-primary">
               <FontAwesomeIcon icon={faFloppyDisk} /> Done
             </button>
           </div>
-
-          {/* <div className="editor-is-busy" v-show="isBusy">
-            <img src="../assets/img/spin64.svg" />
-          </div> */}
         </div>
       </div>
     )
