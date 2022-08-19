@@ -110,7 +110,6 @@ class App extends React.Component<IProps, IState> {
   }
 
   render(): React.ReactNode {
-    let resultWrap: React.ReactNode
     let settingsModal: React.ReactNode | null = null
 
     if (this.state.isSettingsModalOpen) {
@@ -118,52 +117,53 @@ class App extends React.Component<IProps, IState> {
         onDone={this.onCloseSettingsModal}
         ignoredCardNames={this.state.ignoredCardNames}></DiffSettingsModal>
     }
-
-    if (this.state.deckStrA && this.state.deckStrB) {
-      resultWrap = <div className='DeckListWrap'>
-        <h4>Results</h4>
-        <textarea
-          className='DeckList'
-          value={this.state.diffStr}
-          ref={this.diffOutput}
-          rows={15}
-          readOnly={true}></textarea>
-      </div>
-    } else {
-      resultWrap = <div className='DeckListWrap'>
-        <h4 className='TextCenter'>Add two decklists to compute their differences</h4>
-      </div>
-    }
     return (
       <div className="App">
-        <div className="ButtonWrap">
+        <div className="item header">
+          <h3>Paste/enter your deck lists, then click "Compare"</h3>
+        </div>
+        <div className="item buttons">
           <button onClick={this.onCompare} className='btn-primary'>Compare</button>
           <button onClick={this.onOpenSettingsModal}>
             <FontAwesomeIcon icon={faGear} />
           </button>
         </div>
-        <div className='BodyWrap'>
-          <div className='DeckListWrap'>
-            <h4>Deck A</h4>
-            <textarea
-              className='DeckList'
-              value={this.state.deckStrA}
-              onChange={this.handleChangeA}
-              ref={this.deckInputA}
-              rows={15}></textarea>
-          </div>
-
-          <div className='DeckListWrap'>
-            <h4>Deck B</h4>
-            <textarea
-              className='DeckList'
-              value={this.state.deckStrB}
-              ref={this.deckInputB}
-              onChange={this.handleChangeB}
-              rows={15}></textarea>
-          </div>
-          
-          {resultWrap}
+        <div className="item deck deck-a">
+          <h4 className="deck-label">
+            Deck A
+          </h4>
+          <textarea
+            name="deck-a"
+            className="deck-text"
+            value={this.state.deckStrA}
+            onChange={this.handleChangeA}
+            ref={this.deckInputA}
+            rows={15}></textarea>
+        </div>
+        <div className="item deck deck-b">
+          <h4 className="deck-label">
+            Deck B
+          </h4>
+          <textarea
+            name="deck-b"
+            className="deck-text"
+            value={this.state.deckStrB}
+            onChange={this.handleChangeB}
+            ref={this.deckInputB}
+            rows={15}></textarea>
+        </div>
+        <div className="item deck deck-diff">
+          <h4 className="deck-label">
+            Results
+          </h4>
+          <textarea
+            name="deck-a"
+            className="deck-text"
+            value={this.state.diffStr}
+            ref={this.deckInputB}
+            onChange={this.handleChangeB}
+            rows={15}
+            readOnly={true}></textarea>
         </div>
         {settingsModal}
       </div>
