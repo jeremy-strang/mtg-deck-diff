@@ -118,19 +118,17 @@ class App extends React.Component<IProps, IState> {
     }
 
     if (this.state.deckStrA && this.state.deckStrB) {
-      resultWrap = <div className='Width100Height45'>
-        <div className='DeckListWrap'>
-          <h4>Results</h4>
-          <textarea
-            className='DeckList'
-            value={this.state.diffStr}
-            ref={this.diffOutput}
-            rows={15}
-            readOnly={true}></textarea>
-        </div>
+      resultWrap = <div className='DeckListWrap'>
+        <h4>Results</h4>
+        <textarea
+          className='DeckList'
+          value={this.state.diffStr}
+          ref={this.diffOutput}
+          rows={15}
+          readOnly={true}></textarea>
       </div>
     } else {
-      resultWrap = <div className='Width100Height45'>
+      resultWrap = <div className='DeckListWrap'>
         <h4 className='TextCenter'>Add two decklists to compute their differences</h4>
       </div>
     }
@@ -140,7 +138,7 @@ class App extends React.Component<IProps, IState> {
           <button onClick={this.onCompare} className='btn-primary'>Compare</button>
           <button onClick={this.onOpenSettingsModal}>Settings</button>
         </div>
-        <div className='Width100Height45'>
+        <div className='BodyWrap'>
           <div className='DeckListWrap'>
             <h4>Deck A</h4>
             <textarea
@@ -160,8 +158,9 @@ class App extends React.Component<IProps, IState> {
               onChange={this.handleChangeB}
               rows={15}></textarea>
           </div>
+          
+          {resultWrap}
         </div>
-        {resultWrap}
         {settingsModal}
       </div>
     )

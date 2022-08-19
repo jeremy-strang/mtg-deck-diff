@@ -56,12 +56,20 @@ div.ButtonWrap {
   }
 }
 
+div.BodyWrap {
+  @extend .pnl;
+  display: block;
+  width: 100%;
+  height: calc(100% - 40px);
+}
+
 div.DeckListWrap {
   position: relative;
   height: 100%;
-  width: 300px;
+  width: calc(33% - 12px);
   margin: 6px;
   display: inline-block;
+  max-width: 350px;
 
   &.w100 {
     width: 100%;
