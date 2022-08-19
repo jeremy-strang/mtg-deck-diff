@@ -36,14 +36,10 @@ class App extends React.Component<IProps, IState> {
     this.state = {
       deckStrA: deckStrA,
       deckStrB: deckStrB,
-      diffStr: deckStrA && deckStrB ? this.computeDiffListStr(deckStrA, deckStrB, ignoredCardNames) : '',
+      diffStr: '',
       ignoredCardNames,
       isSettingsModalOpen: false,
     } as IState
-  }
-
-  componentDidUpdate = () => {
-    this.resetScroll()
   }
 
   resetScroll = () => {
@@ -73,33 +69,22 @@ class App extends React.Component<IProps, IState> {
   }
 
   handleChangeA = (e: any) => {
-    const deckStrA = e.target.value || ''
-    if (window.localStorage) {
-      window.localStorage.setItem('deckStrA', deckStrA)
-    }
-    if (this.state.deckStrB) {
-      this.setState({
-        deckStrA: deckStrA,
-        diffStr: this.computeDiffListStr(e.target.value, this.state.deckStrB, this.state.ignoredCardNames),
-      }, () => this.resetScroll())
-    } else {
-      this.setState({
-        deckStrA: deckStrA,
-      })
-    }
+    this.setState({
+      deckStrA: e.target.value,
+    })
   }
 
   handleChangeB = (e: any) => {
-    if (this.state.deckStrA) {
-      this.setState({
-        deckStrB: e.target.value,
-        diffStr: this.computeDiffListStr(this.state.deckStrA, e.target.value, this.state.ignoredCardNames),
-      })
-    } else {
-      this.setState({
-        deckStrB: e.target.value,
-      })
-    }
+    this.setState({
+      deckStrB: e.target.value,
+    })
+  }
+
+  onCompare = () => {
+    this.resetScroll()
+    this.setState({
+      diffStr: this.computeDiffListStr(this.state.deckStrA, this.state.deckStrB, this.state.ignoredCardNames),
+    })
   }
 
   onOpenSettingsModal =() => {
@@ -108,15 +93,15 @@ class App extends React.Component<IProps, IState> {
     })
   }
 
-  onCloseSettingsModal = (ignoredCardNames?: string[]) => {
+  onCloseSettingsModal = (updatedIgnoredCardNames?: string[]) => {
     const newState = {
       isSettingsModalOpen: false,
     } as IState
     
-    if (ignoredCardNames) {
-      newState.ignoredCardNames = ignoredCardNames
+    if (updatedIgnoredCardNames) {
+      newState.ignoredCardNames = updatedIgnoredCardNames
       if (this.state.deckStrA && this.state.deckStrB) {
-        newState.diffStr = this.computeDiffListStr(this.state.deckStrA, this.state.deckStrB, this.state.ignoredCardNames)
+        newState.diffStr = this.computeDiffListStr(this.state.deckStrA, this.state.deckStrB, newState.ignoredCardNames)
       }
     }
     this.setState(newState)
@@ -133,7 +118,7 @@ class App extends React.Component<IProps, IState> {
     }
 
     if (this.state.deckStrA && this.state.deckStrB) {
-      resultWrap = <div className='Width100Height50'>
+      resultWrap = <div className='Width100Height45'>
         <div className='DeckListWrap'>
           <h4>Results</h4>
           <textarea
@@ -145,16 +130,17 @@ class App extends React.Component<IProps, IState> {
         </div>
       </div>
     } else {
-      resultWrap = <div className='Width100Height50'>
+      resultWrap = <div className='Width100Height45'>
         <h4 className='TextCenter'>Add two decklists to compute their differences</h4>
       </div>
     }
     return (
       <div className="App">
         <div className="ButtonWrap">
+          <button onClick={this.onCompare} className='btn-primary'>Compare</button>
           <button onClick={this.onOpenSettingsModal}>Settings</button>
         </div>
-        <div className='Width100Height50'>
+        <div className='Width100Height45'>
           <div className='DeckListWrap'>
             <h4>Deck A</h4>
             <textarea
