@@ -63,7 +63,6 @@ class App extends React.Component<IProps, IState> {
     const deckA = Deck.parse(deckStrA)
     const deckB = Deck.parse(deckStrB)
     
-    console.log(this.state)
     if (window.localStorage) {
       window.localStorage.setItem('deckStrA', deckA.toString())
       window.localStorage.setItem('deckStrB', deckB.toString())

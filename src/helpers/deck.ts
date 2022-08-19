@@ -33,7 +33,7 @@ export class Deck {
   static parse(deckListStr: string): Deck {
     const parsedDeck = new Deck([], [], [])
     const companionsSetLower = new Set(companions.map(comp => comp.toLowerCase()))
-    
+
     if (deckListStr) {
       let mainDone = false
       let companionDone = true
@@ -58,7 +58,7 @@ export class Deck {
             quantity: parseInt(line.slice(0, line.indexOf(' '))),
             card: cardName,
           }
-          
+
           if (!companionDone) {
             parsedDeck.companion = [deckLine]
           } else if (!mainDone) {
@@ -100,11 +100,7 @@ export class Deck {
   computeDiff(otherDeck: Deck, ignoredCardNames?: string[]): Deck {
     const ignoredNames = ignoredCardNames ? new Set<string>(ignoredCardNames.map((n) => n.toLowerCase())) : new Set<string>()
     const filterNames = (line: DeckLine) => !ignoredNames.has(line.card.toLowerCase())
-    
-    console.log('before')
-    console.log(this.mainDeck)
-    console.log('after')
-    console.log(this.mainDeck.filter(filterNames))
+
     const diff = new Deck(
       this.computeSubDiff(this.companion.filter(filterNames), otherDeck.companion.filter(filterNames)),
       this.computeSubDiff(this.mainDeck.filter(filterNames), otherDeck.mainDeck.filter(filterNames)),
@@ -128,7 +124,7 @@ export class Deck {
     const thisDeckMap = this.buildCardQuantityMap(deckLines)
     const otherDeckMap = this.buildCardQuantityMap(otherDeckLines)
     const diffDeckMap = new Map<string, number>()
-    
+
 
     for (let cq of deckLines) {
       let otherQuantity = otherDeckMap.has(cq.card) ? otherDeckMap.get(cq.card) : 0
