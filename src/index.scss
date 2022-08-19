@@ -40,12 +40,6 @@ div.App {
   padding: $pad-lg;
 }
 
-div.Width100Height45 {
-  @extend .pnl;
-  width: 100%;
-  height: 45%;
-}
-
 div.ButtonWrap {
   @extend .pnl;
   display: block;
