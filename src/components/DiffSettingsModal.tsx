@@ -5,10 +5,11 @@ import './DiffSettingsModal.scss'
 
 interface IProps {
   onDone: Function
+  ignoredCardNames: string[]
 }
 
 interface IState {
-  ignoredCardNames: string
+  ignoredCardNamesStr: string
 }
 
 class DiffSettingsModal extends React.Component<IProps, IState> {
@@ -16,19 +17,15 @@ class DiffSettingsModal extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props)
 
-    let ignoredCardNames = window.localStorage ? window.localStorage.getItem('ignoredCardNames') || '' : ''
     this.state = {
-      ignoredCardNames: ignoredCardNames || '',
+      ignoredCardNamesStr: props.ignoredCardNames.join('\n') || '',
     } as IState
   }
 
   handleChange = (e: any) => {
-    const ignoredCardNames = e.target.value || ''
-    if (window.localStorage) {
-      window.localStorage.setItem('ignoredCardNames', ignoredCardNames)
-    }
+    const ignoredCardNamesStr = e.target.value || ''
     this.setState({
-      ignoredCardNames,
+      ignoredCardNamesStr,
     })
   }
 
@@ -50,14 +47,14 @@ class DiffSettingsModal extends React.Component<IProps, IState> {
               <h4>Ignore these card names:</h4>
               <textarea
                 className='DeckList'
-                value={this.state.ignoredCardNames}
+                value={this.state.ignoredCardNamesStr}
                 onChange={this.handleChange}
                 rows={15}></textarea>
             </div>
           </div>
 
           <div className="modal-btn-wrap">
-            <button onClick={() => this.props.onDone(this.state.ignoredCardNames.split('\n'))} className="btn-primary">
+            <button onClick={() => this.props.onDone(this.state.ignoredCardNamesStr.split('\n'))} className="btn-primary">
               <FontAwesomeIcon icon={faFloppyDisk} /> Done
             </button>
           </div>

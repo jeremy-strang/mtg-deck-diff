@@ -101,6 +101,10 @@ export class Deck {
     const ignoredNames = ignoredCardNames ? new Set<string>(ignoredCardNames.map((n) => n.toLowerCase())) : new Set<string>()
     const filterNames = (line: DeckLine) => !ignoredNames.has(line.card.toLowerCase())
     
+    console.log('before')
+    console.log(this.mainDeck)
+    console.log('after')
+    console.log(this.mainDeck.filter(filterNames))
     const diff = new Deck(
       this.computeSubDiff(this.companion.filter(filterNames), otherDeck.companion.filter(filterNames)),
       this.computeSubDiff(this.mainDeck.filter(filterNames), otherDeck.mainDeck.filter(filterNames)),

@@ -28,12 +28,16 @@ class App extends React.Component<IProps, IState> {
     this.deckInputB = React.createRef<HTMLTextAreaElement>()
     this.diffOutput = React.createRef<HTMLTextAreaElement>()
 
-    let deckStrA = window.localStorage ? window.localStorage.getItem('deckStrA') || '' : ''
+    const deckStrA = window.localStorage ? window.localStorage.getItem('deckStrA') || '' : ''
+    const deckStrB = window.localStorage ? window.localStorage.getItem('deckStrB') || '' : ''
+    const ignoredCardNamesStr = window.localStorage ? window.localStorage.getItem('ignoredCardNames') || '' : ''
+    const ignoredCardNames = ignoredCardNamesStr ? JSON.parse(ignoredCardNamesStr) || [] : []
+
     this.state = {
       deckStrA: deckStrA,
-      deckStrB: '',
-      diffStr: '',
-      ignoredCardNames: [],
+      deckStrB: deckStrB,
+      diffStr: deckStrA && deckStrB ? this.computeDiffListStr(deckStrA, deckStrB, ignoredCardNames) : '',
+      ignoredCardNames,
       isSettingsModalOpen: false,
     } as IState
   }
@@ -55,14 +59,18 @@ class App extends React.Component<IProps, IState> {
     this.diffOutput.current?.focus()
   }
 
-  computeDiffListStr = (deckStrA: string, deckStrB: string): string => {
-    const deckListA = Deck.parse(deckStrA)
+  computeDiffListStr = (deckStrA: string, deckStrB: string, ignoredCardNames: string[]): string => {
+    const deckA = Deck.parse(deckStrA)
+    const deckB = Deck.parse(deckStrB)
     
+    console.log(this.state)
     if (window.localStorage) {
-      window.localStorage.setItem('deckStrA', deckListA.toString())
+      window.localStorage.setItem('deckStrA', deckA.toString())
+      window.localStorage.setItem('deckStrB', deckB.toString())
+      window.localStorage.setItem('ignoredCardNames', JSON.stringify(ignoredCardNames))
     }
 
-    return deckListA.computeDiff(Deck.parse(deckStrB), this.state.ignoredCardNames).toString(true)
+    return deckA.computeDiff(deckB, ignoredCardNames).toString(true)
   }
 
   handleChangeA = (e: any) => {
@@ -73,7 +81,7 @@ class App extends React.Component<IProps, IState> {
     if (this.state.deckStrB) {
       this.setState({
         deckStrA: deckStrA,
-        diffStr: this.computeDiffListStr(e.target.value, this.state.deckStrB),
+        diffStr: this.computeDiffListStr(e.target.value, this.state.deckStrB, this.state.ignoredCardNames),
       }, () => this.resetScroll())
     } else {
       this.setState({
@@ -86,7 +94,7 @@ class App extends React.Component<IProps, IState> {
     if (this.state.deckStrA) {
       this.setState({
         deckStrB: e.target.value,
-        diffStr: this.computeDiffListStr(this.state.deckStrA, e.target.value),
+        diffStr: this.computeDiffListStr(this.state.deckStrA, e.target.value, this.state.ignoredCardNames),
       })
     } else {
       this.setState({
@@ -109,7 +117,7 @@ class App extends React.Component<IProps, IState> {
     if (ignoredCardNames) {
       newState.ignoredCardNames = ignoredCardNames
       if (this.state.deckStrA && this.state.deckStrB) {
-        newState.diffStr = this.computeDiffListStr(this.state.deckStrA, this.state.deckStrB)
+        newState.diffStr = this.computeDiffListStr(this.state.deckStrA, this.state.deckStrB, this.state.ignoredCardNames)
       }
     }
     this.setState(newState)
@@ -120,7 +128,9 @@ class App extends React.Component<IProps, IState> {
     let settingsModal: React.ReactNode | null = null
 
     if (this.state.isSettingsModalOpen) {
-      settingsModal = <DiffSettingsModal onDone={this.onCloseSettingsModal}></DiffSettingsModal>
+      settingsModal = <DiffSettingsModal
+        onDone={this.onCloseSettingsModal}
+        ignoredCardNames={this.state.ignoredCardNames}></DiffSettingsModal>
     }
 
     if (this.state.deckStrA && this.state.deckStrB) {
