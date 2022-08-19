@@ -70,6 +70,8 @@ class App extends React.Component<IProps, IState> {
     return deckA.computeDiff(deckB, ignoredCardNames).toString(true)
   }
 
+  onFocusSelectAll = (e: any) => e.target.select()
+
   handleChangeA = (e: any) => {
     this.setState({
       deckStrA: e.target.value,
@@ -138,6 +140,7 @@ class App extends React.Component<IProps, IState> {
             className="deck-text"
             value={this.state.deckStrA}
             onChange={this.handleChangeA}
+            onFocus={this.onFocusSelectAll}
             ref={this.deckInputA}
             rows={15}></textarea>
         </div>
@@ -151,6 +154,7 @@ class App extends React.Component<IProps, IState> {
             className="deck-text"
             value={this.state.deckStrB}
             onChange={this.handleChangeB}
+            onFocus={this.onFocusSelectAll}
             ref={this.deckInputB}
             rows={15}></textarea>
         </div>

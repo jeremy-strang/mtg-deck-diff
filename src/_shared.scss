@@ -26,16 +26,17 @@ $theme-yellow:        rgb(249, 220, 92); // #f9dc5c;
 $theme-pink:          rgb(242, 133, 205); // #f285cd;
 $theme-orange:        rgb(255, 115, 0); // #ff7300;
 
+$dark0:               rgb(30, 30, 30); // #282828;
 $dark1:               rgb(40, 40, 40); // #282828;
-$dark2:               lighten($dark1, 5%);
-$dark3:               lighten($dark1, 10%);
-$dark4:               lighten($dark1, 15%);
-$dark5:               lighten($dark1, 20%);
-$dark6:               lighten($dark1, 25%);
-$dark7:               lighten($dark1, 30%);
-$dark8:               lighten($dark1, 35%);
-$dark9:               lighten($dark1, 40%);
-$dark10:              lighten($dark1, 45%);
+$dark2:               lighten($dark0, 5%);
+$dark3:               lighten($dark0, 10%);
+$dark4:               lighten($dark0, 15%);
+$dark5:               lighten($dark0, 20%);
+$dark6:               lighten($dark0, 25%);
+$dark7:               lighten($dark0, 30%);
+$dark8:               lighten($dark0, 35%);
+$dark9:               lighten($dark0, 40%);
+$dark10:              lighten($dark0, 45%);
 
 $gray1:               rgb(251, 251, 251); // #fbfbfb;
 $gray2:               darken($gray1, 3%);

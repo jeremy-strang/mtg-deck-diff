@@ -19,6 +19,9 @@
   grid-row-gap: 0.5rem;
   min-width: 60rem;
   min-height: 30rem;
+  margin: 0 auto;
+  background-color: #202020;
+  background-color: $dark0;
 
   h1,
   h2,
@@ -34,7 +37,7 @@
     font-weight: normal;
   }
 
-  .item {
+  .header, .buttons, .deck, .deck-compare {
     position: relative;
   }
 
@@ -60,6 +63,9 @@
   .deck-compare {
     display: grid;
     grid-template-rows: auto 2rem auto;
+    grid-column-start: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
 
     button {
       grid-row-start: 2;
