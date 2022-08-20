@@ -134,8 +134,6 @@ $modal-hdr-height: 28px;
   @extend .pnl;
   @extend .w100;
   background-color: $dark1;
-  border-bottom-left-radius: $border-radius-lg;
-  border-bottom-right-radius: $border-radius-lg;
   height: 100%;
   padding: $pad-md;
   width: 100%;
@@ -167,7 +165,7 @@ $modal-hdr-height: 28px;
   background-color: $dark3;
   border-bottom-left-radius: $border-radius-lg;
   border-bottom-right-radius: $border-radius-lg;
-  border-top: 1px solid $border-color-light;
+  border-top: 1px solid $dark5;
   padding: $pad-md;
 
   button, input[type=submit], .btn, .btn-dd, a, .agreement {
