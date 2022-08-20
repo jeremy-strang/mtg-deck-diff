@@ -5,10 +5,10 @@ div.NavBar {
   display: grid;
   grid-template-columns: 10rem auto;
   grid-template-rows: 100%;
-  height: 3.5rem;
+  height: 4rem;
   width: 100%;
   background-color: $dark3;
-  padding: 0.2rem 0.2rem;
+  padding: 0.4rem 0.8rem;
   border-bottom: 1px solid $dark5;
 
   img.logo {
@@ -26,7 +26,7 @@ div.NavBar {
     grid-row-start: 1;
     box-sizing: border-box;
     position: relative;
-    padding: 0.5rem;
+    padding: 0.6rem 0;
     display: inline-block;
     
     button {
