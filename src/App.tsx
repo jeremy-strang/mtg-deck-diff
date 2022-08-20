@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import './App.scss'
 import DiffSettingsModal from './components/DiffSettingsModal'
-import { Deck } from './helpers/deck'
+import { Deck } from './models/deck'
 
 interface IProps {
   deckStrA: string

@@ -52,7 +52,12 @@ export class Deck {
           line = line.slice(0, line.length)
         }
 
-        const cardName = line.slice(line.indexOf(' '), line.length).trim()
+        if (line.includes(' (')) {
+          line = line.slice(0, line.indexOf(' ('))
+        }
+
+        let cardName = line.slice(line.indexOf(' '), line.length).trim()
+        
         if (/^\d+\s+.*$/.test(line)) {
           let deckLine: DeckLine = {
             quantity: parseInt(line.slice(0, line.indexOf(' '))),
