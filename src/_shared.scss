@@ -26,17 +26,17 @@ $theme-yellow:        rgb(249, 220, 92); // #f9dc5c;
 $theme-pink:          rgb(242, 133, 205); // #f285cd;
 $theme-orange:        rgb(255, 115, 0); // #ff7300;
 
-$dark0:               rgb(30, 30, 30); // #282828;
-$dark1:               rgb(40, 40, 40); // #282828;
-$dark2:               lighten($dark0, 5%);
-$dark3:               lighten($dark0, 10%);
-$dark4:               lighten($dark0, 15%);
-$dark5:               lighten($dark0, 20%);
-$dark6:               lighten($dark0, 25%);
-$dark7:               lighten($dark0, 30%);
-$dark8:               lighten($dark0, 35%);
-$dark9:               lighten($dark0, 40%);
-$dark10:              lighten($dark0, 45%);
+$dark0:               #030303;
+$dark1:               lighten($dark0, 5%);
+$dark2:               lighten($dark0, 10%);
+$dark3:               lighten($dark0, 15%);
+$dark4:               lighten($dark0, 20%);
+$dark5:               lighten($dark0, 25%);
+$dark6:               lighten($dark0, 30%);
+$dark7:               lighten($dark0, 35%);
+$dark8:               lighten($dark0, 40%);
+$dark9:               lighten($dark0, 45%);
+$dark10:              lighten($dark0, 50%);
 
 $gray1:               rgb(251, 251, 251); // #fbfbfb;
 $gray2:               darken($gray1, 3%);
@@ -49,7 +49,7 @@ $gray8:               darken($gray1, 25%);
 $gray9:               darken($gray1, 29%);
 $gray10:              darken($gray1, 33%);
 
-$font-light:        rgb(255, 255, 255); // #fff;
+$font-light:        $gray4;
 $font-dark:           $dark1;
 $font-stack:          sans-serif, Helvetica, Arial, 'Avenir';
 $font-size:           14px;
