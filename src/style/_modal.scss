@@ -63,7 +63,7 @@ $modal-hdr-height: 28px;
   }
 
   &.lg {
-    margin-left: -(1150px / 2);
+    margin-left: calc(-1150px / 2);
     max-width: 1150px;
     width: 90%;
 
