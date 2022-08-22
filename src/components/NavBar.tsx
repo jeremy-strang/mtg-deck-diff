@@ -25,8 +25,8 @@ class NavBar extends React.Component<IProps, IState> {
       <div className="NavBar">
         <img src={icon128} className="logo" alt="Logo"></img>
         <div className="buttons">
-          <button className="btn-primary">Log In</button>
-          <button className="btn-primary">Sign Up</button>
+          <button>Log In</button>
+          <button>Sign Up</button>
         </div>
       </div>
     )
