@@ -84,19 +84,36 @@ export class Deck {
   toString(isDiff?: boolean): string {
     let result = ''
 
+    console.log('test')
+    // If we're displaying as a diff, show the positive changes first
+    const companion = isDiff ? [
+      ...this.companion.filter((line: DeckLine) => line.quantity >= 0),
+      ...this.companion.filter((line: DeckLine) => line.quantity < 0),
+    ] : this.companion
+
+    const mainDeck = isDiff ? [
+      ...this.mainDeck.filter((line: DeckLine) => line.quantity >= 0),
+      ...this.mainDeck.filter((line: DeckLine) => line.quantity < 0),
+    ] : this.mainDeck
+
+    const sideboard = isDiff ? [
+      ...this.sideboard.filter((line: DeckLine) => line.quantity >= 0),
+      ...this.sideboard.filter((line: DeckLine) => line.quantity < 0),
+    ] : this.sideboard
+
     const joinDeckLines = (deckLines: DeckLine[]) =>
       deckLines.map(item => `${item.quantity > 0 && isDiff ? '+' : ''}${item.quantity} ${item.card}`).join('\n')
 
-    if (this.companion.length > 0) {
-      const companionStr = joinDeckLines(this.companion)
+    if (companion.length > 0) {
+      const companionStr = joinDeckLines(companion)
       result += `Companion\n${companionStr}\n\n`
     }
-    if (this.mainDeck.length > 0) {
-      const mainStr = joinDeckLines(this.mainDeck)
+    if (mainDeck.length > 0) {
+      const mainStr = joinDeckLines(mainDeck)
       result += `Deck\n${mainStr}\n\n`
     }
-    if (this.sideboard.length > 0) {
-      const sideStr = joinDeckLines(this.sideboard)
+    if (sideboard.length > 0) {
+      const sideStr = joinDeckLines(sideboard)
       result += `Sideboard\n${sideStr}\n\n`
     }
     return result
