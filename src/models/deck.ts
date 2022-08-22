@@ -84,7 +84,6 @@ export class Deck {
   toString(isDiff?: boolean): string {
     let result = ''
 
-    console.log('test')
     // If we're displaying as a diff, show the positive changes first
     const companion = isDiff ? [
       ...this.companion.filter((line: DeckLine) => line.quantity >= 0),
