@@ -83,22 +83,19 @@ export class Deck {
 
   toString(isDiff?: boolean): string {
     let result = ''
+    
+    // Groups pos/neg lines in the diff together if it's a diff
+    const splitPosAndNeg = (lines: DeckLine[]): DeckLine[] => {
+      return isDiff ? [
+        ...lines.filter((line: DeckLine) => line.quantity >= 0),
+        ...lines.filter((line: DeckLine) => line.quantity < 0),
+      ] : lines
+    }
 
     // If we're displaying as a diff, show the positive changes first
-    const companion = isDiff ? [
-      ...this.companion.filter((line: DeckLine) => line.quantity >= 0),
-      ...this.companion.filter((line: DeckLine) => line.quantity < 0),
-    ] : this.companion
-
-    const mainDeck = isDiff ? [
-      ...this.mainDeck.filter((line: DeckLine) => line.quantity >= 0),
-      ...this.mainDeck.filter((line: DeckLine) => line.quantity < 0),
-    ] : this.mainDeck
-
-    const sideboard = isDiff ? [
-      ...this.sideboard.filter((line: DeckLine) => line.quantity >= 0),
-      ...this.sideboard.filter((line: DeckLine) => line.quantity < 0),
-    ] : this.sideboard
+    const companion = splitPosAndNeg(this.companion)
+    const mainDeck = splitPosAndNeg(this.mainDeck)
+    const sideboard = splitPosAndNeg(this.sideboard)
 
     const joinDeckLines = (deckLines: DeckLine[]) =>
       deckLines.map(item => `${item.quantity > 0 && isDiff ? '+' : ''}${item.quantity} ${item.card}`).join('\n')
