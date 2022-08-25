@@ -2,6 +2,7 @@ import { faGear, faArrowRight} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import './DeckComparer.scss'
+import DeckInput from './DeckInput'
 import DiffSettingsModal from './DiffSettingsModal'
 import { Deck } from '../models/deck'
 
@@ -17,16 +18,16 @@ interface IState {
 }
 
 class DeckComparer extends React.Component<IProps, IState> {
-  private deckInputA: React.RefObject<HTMLTextAreaElement>
-  private deckInputB: React.RefObject<HTMLTextAreaElement>
-  private diffOutput: React.RefObject<HTMLTextAreaElement>
+  // private deckInputA: React.RefObject<HTMLTextAreaElement>
+  // private deckInputB: React.RefObject<HTMLTextAreaElement>
+  // private diffOutput: React.RefObject<HTMLTextAreaElement>
 
   constructor(props: IProps) {
     super(props)
 
-    this.deckInputA = React.createRef<HTMLTextAreaElement>()
-    this.deckInputB = React.createRef<HTMLTextAreaElement>()
-    this.diffOutput = React.createRef<HTMLTextAreaElement>()
+    // this.deckInputA = React.createRef<HTMLTextAreaElement>()
+    // this.deckInputB = React.createRef<HTMLTextAreaElement>()
+    // this.diffOutput = React.createRef<HTMLTextAreaElement>()
 
     const deckStrA = window.localStorage ? window.localStorage.getItem('deckStrA') || '' : ''
     const deckStrB = window.localStorage ? window.localStorage.getItem('deckStrB') || '' : ''
@@ -42,18 +43,18 @@ class DeckComparer extends React.Component<IProps, IState> {
     } as IState
   }
 
-  resetScroll = () => {
-    if (this.deckInputA && this.deckInputA.current) {
-      this.deckInputA.current.scrollTop = 0
-    }
-    if (this.deckInputB && this.deckInputB.current) {
-      this.deckInputB.current.scrollTop = 0
-    }
-    if (this.diffOutput && this.diffOutput.current) {
-      this.diffOutput.current.scrollTop = 0
-    }
-    this.diffOutput.current?.focus()
-  }
+  // resetScroll = () => {
+  //   if (this.deckInputA && this.deckInputA.current) {
+  //     this.deckInputA.current.scrollTop = 0
+  //   }
+  //   if (this.deckInputB && this.deckInputB.current) {
+  //     this.deckInputB.current.scrollTop = 0
+  //   }
+  //   if (this.diffOutput && this.diffOutput.current) {
+  //     this.diffOutput.current.scrollTop = 0
+  //   }
+  //   this.diffOutput.current?.focus()
+  // }
 
   computeDiffListStr = (deckStrA: string, deckStrB: string, ignoredCardNames: string[]): string => {
     const deckA = Deck.parse(deckStrA)
@@ -70,20 +71,20 @@ class DeckComparer extends React.Component<IProps, IState> {
 
   onFocusSelectAll = (e: any) => e.target.select()
 
-  handleChangeA = (e: any) => {
+  handleChangeA = (deckStr: string) => {
     this.setState({
-      deckStrA: e.target.value,
+      deckStrA: deckStr,
     })
   }
 
-  handleChangeB = (e: any) => {
+  handleChangeB = (deckStr: string) => {
     this.setState({
-      deckStrB: e.target.value,
+      deckStrB: deckStr,
     })
   }
 
   onCompare = () => {
-    this.resetScroll()
+    // this.resetScroll()
     this.setState({
       diffStr: this.computeDiffListStr(this.state.deckStrA, this.state.deckStrB, this.state.ignoredCardNames),
     })
@@ -130,7 +131,7 @@ class DeckComparer extends React.Component<IProps, IState> {
         </div>
 
         <div className="deck deck-a">
-          <h4 className="deck-label">
+          {/* <h4 className="deck-label">
             Deck A
           </h4>
           <textarea
@@ -140,21 +141,18 @@ class DeckComparer extends React.Component<IProps, IState> {
             onChange={this.handleChangeA}
             onFocus={this.onFocusSelectAll}
             ref={this.deckInputA}
-            rows={15}></textarea>
+            rows={15}></textarea> */}
+          <DeckInput
+            deckStr={this.state.deckStrA}
+            onChange={this.handleChangeA}
+          ></DeckInput>
         </div>
 
         <div className="deck deck-b">
-          <h4 className="deck-label">
-            Deck B
-          </h4>
-          <textarea
-            name="deck-b"
-            className="deck-text"
-            value={this.state.deckStrB}
+          <DeckInput
+            deckStr={this.state.deckStrB}
             onChange={this.handleChangeB}
-            onFocus={this.onFocusSelectAll}
-            ref={this.deckInputB}
-            rows={15}></textarea>
+          ></DeckInput>
         </div>
 
         <div className="deck-compare">
@@ -164,17 +162,19 @@ class DeckComparer extends React.Component<IProps, IState> {
         </div>
 
         <div className="deck deck-diff">
-          <h4 className="deck-label">
+          {/* <h4 className="deck-label">
             Results
           </h4>
           <textarea
             name="deck-a"
             className="deck-text"
             value={this.state.diffStr}
-            ref={this.deckInputB}
-            onChange={this.handleChangeB}
             rows={15}
-            readOnly={true}></textarea>
+            readOnly={true}></textarea> */}
+          <DeckInput
+            deckStr={this.state.diffStr}
+            readOnly={true}
+          ></DeckInput>
         </div>
         
         {settingsModal}

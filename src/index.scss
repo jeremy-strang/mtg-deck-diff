@@ -31,34 +31,3 @@ body {
   height: 100%;
   overflow: auto;
 }
-
-
-.deck {
-  display: grid;
-  
-  .deck-label,
-  .deck-text {
-    grid-column-start: 1;
-    grid-column-end: 3;
-  }
-
-  .deck-label {
-    width: 100%;
-  }
-
-  textarea.deck-text {
-    border-radius: 0.2rem;
-    font-family: monospace;
-    width: 100%;
-    resize: none;
-
-    &:read-only {
-      background-color: $dark1;
-
-      &:focus {
-        border-color: $dark3;
-        background-color: $dark1;
-      }
-    }
-  }
-}

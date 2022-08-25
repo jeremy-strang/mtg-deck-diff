@@ -22,20 +22,6 @@
   margin: 0 auto;
   background-color: $dark1;
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  label,
-  p {
-    color: $gray5;
-    margin-top: 0.1rem;
-    margin-bottom: 0.1rem;
-    margin: 0 0.1rem 0.1rem 0;
-    font-weight: normal;
-  }
-
   .header, .buttons, .deck, .deck-compare {
     position: relative;
   }
@@ -72,28 +58,22 @@
   }
 
   .deck {
-    grid-template-rows: 1.7rem auto;
-    grid-template-columns: 50% 50%;
+    grid-row-start: 2;
+    grid-row-end: 3;
   }
 
   .deck-a {
     grid-column-start: 1;
     grid-column-end: 2;
-    grid-row-start: 2;
-    grid-row-end: 3;
   }
 
   .deck-b {
     grid-column-start: 2;
     grid-column-end: 3;
-    grid-row-start: 2;
-    grid-row-end: 3;
   }
 
   .deck-diff {
     grid-column-start: 4;
     grid-column-end: 5;
-    grid-row-start: 2;
-    grid-row-end: 3;
   }
 }

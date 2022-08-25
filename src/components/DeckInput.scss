@@ -1,0 +1,41 @@
+@import '../_shared.scss';
+
+.DeckInput {
+  position: relative;
+  display: grid;
+  height: 100%;
+  width: 100%;
+  grid-template-rows: 1.7rem auto 1.7rem;
+  grid-template-columns: 50% 50%;
+  
+  .deck-label,
+  .deck-text,
+  .deck-stats {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+
+  .deck-label {
+    width: 100%;
+  }
+
+  textarea.deck-text {
+    border-radius: 0.2rem;
+    font-family: monospace;
+    width: 100%;
+    resize: none;
+
+    &:read-only {
+      background-color: $dark1;
+
+      &:focus {
+        border-color: $dark3;
+        background-color: $dark1;
+      }
+    }
+  }
+
+  .deck-stats {
+    width: 100%;
+  }
+}
