@@ -56,7 +56,8 @@ export class Deck {
           line = line.slice(0, line.indexOf(' ('))
         }
 
-        let cardName = line.slice(line.indexOf(' '), line.length).trim()
+
+        let cardName = line.slice(line.indexOf(' '), line.length).trim().replace(/\s+\/\/\/\s+/g, ' // ')
         
         if (/^\d+\s+.*$/.test(line)) {
           let deckLine: DeckLine = {
@@ -81,15 +82,15 @@ export class Deck {
     return parsedDeck
   }
 
-  toString(isDiff?: boolean): string {
+  toString(): string {
     let result = ''
     
-    // Groups pos/neg lines in the diff together if it's a diff
+    // Groups pos/neg lines in the diff together for cleaner viewing when showing diff
     const splitPosAndNeg = (lines: DeckLine[]): DeckLine[] => {
-      return isDiff ? [
+      return [
         ...lines.filter((line: DeckLine) => line.quantity >= 0),
         ...lines.filter((line: DeckLine) => line.quantity < 0),
-      ] : lines
+      ]
     }
 
     // If we're displaying as a diff, show the positive changes first
@@ -98,7 +99,7 @@ export class Deck {
     const sideboard = splitPosAndNeg(this.sideboard)
 
     const joinDeckLines = (deckLines: DeckLine[]) =>
-      deckLines.map(item => `${item.quantity > 0 && isDiff ? '+' : ''}${item.quantity} ${item.card}`).join('\n')
+      deckLines.map(item => `${item.quantity} ${item.card}`).join('\n')
 
     if (companion.length > 0) {
       const companionStr = joinDeckLines(companion)

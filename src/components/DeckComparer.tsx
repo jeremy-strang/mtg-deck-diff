@@ -18,16 +18,9 @@ interface IState {
 }
 
 class DeckComparer extends React.Component<IProps, IState> {
-  // private deckInputA: React.RefObject<HTMLTextAreaElement>
-  // private deckInputB: React.RefObject<HTMLTextAreaElement>
-  // private diffOutput: React.RefObject<HTMLTextAreaElement>
 
   constructor(props: IProps) {
     super(props)
-
-    // this.deckInputA = React.createRef<HTMLTextAreaElement>()
-    // this.deckInputB = React.createRef<HTMLTextAreaElement>()
-    // this.diffOutput = React.createRef<HTMLTextAreaElement>()
 
     const deckStrA = window.localStorage ? window.localStorage.getItem('deckStrA') || '' : ''
     const deckStrB = window.localStorage ? window.localStorage.getItem('deckStrB') || '' : ''
@@ -43,19 +36,6 @@ class DeckComparer extends React.Component<IProps, IState> {
     } as IState
   }
 
-  // resetScroll = () => {
-  //   if (this.deckInputA && this.deckInputA.current) {
-  //     this.deckInputA.current.scrollTop = 0
-  //   }
-  //   if (this.deckInputB && this.deckInputB.current) {
-  //     this.deckInputB.current.scrollTop = 0
-  //   }
-  //   if (this.diffOutput && this.diffOutput.current) {
-  //     this.diffOutput.current.scrollTop = 0
-  //   }
-  //   this.diffOutput.current?.focus()
-  // }
-
   computeDiffListStr = (deckStrA: string, deckStrB: string, ignoredCardNames: string[]): string => {
     const deckA = Deck.parse(deckStrA)
     const deckB = Deck.parse(deckStrB)
@@ -66,7 +46,7 @@ class DeckComparer extends React.Component<IProps, IState> {
       window.localStorage.setItem('ignoredCardNames', JSON.stringify(ignoredCardNames))
     }
 
-    return deckA.computeDiff(deckB, ignoredCardNames).toString(true)
+    return deckA.computeDiff(deckB, ignoredCardNames).toString()
   }
 
   onFocusSelectAll = (e: any) => e.target.select()
@@ -84,7 +64,6 @@ class DeckComparer extends React.Component<IProps, IState> {
   }
 
   onCompare = () => {
-    // this.resetScroll()
     this.setState({
       diffStr: this.computeDiffListStr(this.state.deckStrA, this.state.deckStrB, this.state.ignoredCardNames),
     })
@@ -131,17 +110,6 @@ class DeckComparer extends React.Component<IProps, IState> {
         </div>
 
         <div className="deck deck-a">
-          {/* <h4 className="deck-label">
-            Deck A
-          </h4>
-          <textarea
-            name="deck-a"
-            className="deck-text"
-            value={this.state.deckStrA}
-            onChange={this.handleChangeA}
-            onFocus={this.onFocusSelectAll}
-            ref={this.deckInputA}
-            rows={15}></textarea> */}
           <DeckInput
             deckStr={this.state.deckStrA}
             onChange={this.handleChangeA}
@@ -162,15 +130,6 @@ class DeckComparer extends React.Component<IProps, IState> {
         </div>
 
         <div className="deck deck-diff">
-          {/* <h4 className="deck-label">
-            Results
-          </h4>
-          <textarea
-            name="deck-a"
-            className="deck-text"
-            value={this.state.diffStr}
-            rows={15}
-            readOnly={true}></textarea> */}
           <DeckInput
             deckStr={this.state.diffStr}
             readOnly={true}
