@@ -56,8 +56,7 @@ export class Deck {
           line = line.slice(0, line.indexOf(' ('))
         }
 
-
-        let cardName = line.slice(line.indexOf(' '), line.length).trim().replace(/\s+\/\/\/\s+/g, ' // ')
+        let cardName = line.slice(line.indexOf(' '), line.length).trim().replace(/\s+\/\/\/\s+/g, ' // ').replace(/,/g, '')
         
         if (/^\d+\s+.*$/.test(line)) {
           let deckLine: DeckLine = {
